@@ -107,7 +107,7 @@ class App extends Component {
         <footer>
         <div className="container">
           <h3>Get in touch?&nbsp;&nbsp;</h3>
-          <h4>nickciliak@gmail.com</h4>
+          <h4>anuj_singh@outlook.in</h4>
         </div>
         </footer>
       </div>
