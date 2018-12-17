@@ -12,12 +12,10 @@ class Searchbar extends Component {
   render() {
     return (
       <div>
-        <form id="run" onSubmit={this.submitForm.bind(this)}>
-          <p>
-            <input id="username" type="text" ref="username" placeholder="Enter your GitHub username and click on generate" autoFocus />
-            <button type="submit" id="gen">Generate</button>
-          </p>
-        </form>
+      <form className="example" onSubmit={this.submitForm.bind(this)}>
+          <input type="text" placeholder="Search.." ref="username" name="search" />
+          <button type="submit"><i className="fa fa-search"></i></button>
+      </form>
       </div>
     );
   }
