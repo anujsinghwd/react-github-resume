@@ -4,6 +4,7 @@ import Resume from './components/Resume';
 import Profile from './components/Profile';
 import Header from './components/Header';
 const API = `https://api.github.com/users`;
+const apiToken = `${process.env.REACT_APP_GITHUB_ACCESS_TOKEN}`;
 
 class App extends Component {
 
@@ -16,22 +17,31 @@ class App extends Component {
     this.getLanguages = this.getLanguages.bind(this);
   }
 
-  getProfile(username){
-    let finalURL = `${API}/${username}`;
-    fetch(finalURL)
-      .then((res) => res.json())
-      .then((data) => {
-        this.getLanguages(data['login']);
-        this.setState({user: data});
-
-      })
-     .catch((error) => console.log('There was a problem in fetching data'));
+    getProfile(username) {
+        let finalURL = `${API}/${username}`;
+        fetch(finalURL,{
+           headers: new Headers({
+             'Authorization': `token ${apiToken}`,
+             'Content-Type': 'application/x-www-form-urlencoded'
+           })
+         })
+        .then((res) => res.json())
+        .then((data) => {
+            this.getLanguages(data['login']);
+            this.setState({user: data});
+          })
+         .catch((error) => console.log('There was a problem in fetching data'));
     }
 
     getLanguages(username){
       let languages = [];
       let finalURL = `https://api.github.com/users/${username}/repos?per_page=1000`;
-      fetch(finalURL)
+      fetch(finalURL,{
+        headers: new Headers({
+            'Authorization': `token ${apiToken}`,
+            'Content-Type': 'application/x-www-form-urlencoded'
+          })
+        })
         .then((res) => res.json())
         .then((data) => {
             data.forEach(function(element) {
@@ -49,7 +59,7 @@ class App extends Component {
     var git_profile;
     var header;
     var skills;
-    console.log(this.state.language);
+
     if(this.state.user.login)
     {
         let userData = this.state.user;
