@@ -12,7 +12,10 @@ class App extends Component {
     super(props);
     this.state = {
       user: [],
-      language: []
+      language: [],
+      totalContribution: 0,
+      contributionTitle: [],
+      contributionUrl: []
     }
     this.getLanguages = this.getLanguages.bind(this);
   }
@@ -28,9 +31,36 @@ class App extends Component {
         .then((res) => res.json())
         .then((data) => {
             this.getLanguages(data['login']);
+            this.getContributions(data['login']);
             this.setState({user: data});
           })
          .catch((error) => console.log('There was a problem in fetching data'));
+    }
+
+    getContributions(username){
+      let contributionTitle = [];
+      let contributionUrl = [];
+      let finalURL = `https://api.github.com/search/issues?q=type:pr+is:merged+author:${username}&per_page=100`;
+      fetch(finalURL,{
+         headers: new Headers({
+           'Authorization': `token ${apiToken}`,
+           'Content-Type': 'application/x-www-form-urlencoded'
+         })
+       })
+      .then((res) => res.json())
+      .then((data) => {
+          const totalContribution = data['total_count'];
+            data['items'].forEach(function(element){
+                contributionTitle.push(element['title']);
+                contributionUrl.push(element['repository_url']);
+            })
+            this.setState({
+                totalContribution,
+                contributionTitle,
+                contributionUrl
+            });
+        })
+       .catch((error) => console.log('There was a problem in fetching data'));
     }
 
     getLanguages(username){
@@ -59,7 +89,7 @@ class App extends Component {
     var git_profile;
     var header;
     var skills;
-
+    var contributions;
     if(this.state.user.login)
     {
         let userData = this.state.user;
@@ -85,6 +115,17 @@ class App extends Component {
                  </div>
     }
 
+    if(this.state.totalContribution > 0){
+      let contributionTitle = this.state.contributionTitle;
+      let contributionUrl = this.state.contributionUrl;
+        contributions = contributionTitle.slice(0, 5).map((i, j) => {
+          return <div className="item">
+                      <h4 key={j}>{i}</h4>
+                      <h5 key={j+10}><a href={contributionUrl[j]}>{contributionUrl[j]}</a></h5>
+                </div>;
+        });
+      }
+
     return (
       <div>
         <Searchbar searchProfile={this.getProfile.bind(this)}/>
@@ -95,23 +136,9 @@ class App extends Component {
             <h2>Languages</h2>
             <div className="rule"></div>
             {skills}
-            <h2>Involvement</h2>
+            <h2>Recent Contributions</h2>
             <div className="rule"></div>
-            <div className="item">
-              <h3>AIGA&nbsp;&nbsp;</h3>
-              <h4>Chicago / West Michigan</h4>
-              <h5>Member.</h5>
-            </div>
-            <div className="item">
-              <h3>Frederik Meijer Honors College&nbsp;&nbsp;</h3>
-              <h4>GVSU</h4>
-              <h5>Mentor Council Member. Freshmen Mentor.</h5>
-            </div>
-            <div className="item">
-              <h3>GV GrooVe! A Cappella&nbsp;&nbsp;</h3>
-              <h4>GVSU</h4>
-              <h5>Music Director.</h5>
-            </div>
+            {contributions}
         </div>
 
         <footer>
