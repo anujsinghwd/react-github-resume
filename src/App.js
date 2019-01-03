@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import Searchbar from './components/Searchbar';
-import Resume from './components/Resume';
 import Profile from './components/Profile';
 import Header from './components/Header';
+import Language from './components/Language';
+import Contribution from './components/Contribution';
 const API = `https://api.github.com/users`;
 const apiToken = `${process.env.REACT_APP_GITHUB_ACCESS_TOKEN}`;
 
@@ -17,7 +18,6 @@ class App extends Component {
       contributionTitle: [],
       contributionUrl: []
     }
-    this.getLanguages = this.getLanguages.bind(this);
   }
 
     getProfile(username) {
@@ -100,44 +100,23 @@ class App extends Component {
     }
 
     if(this.state.language.length > 0){
-        let skill = this.state.language;
-        skill = skill.map((i, j) => {
-                    return <li key={j}>{i}</li>
-                });
-
-        skills = <div className="item">
-                 <h3>&nbsp;&nbsp;</h3>
-                   <h4>
-                     <ul>
-                        {skill}
-                     </ul>
-                   </h4>
-                 </div>
+        skills = <Language languages={this.state.language} />
     }
 
     if(this.state.totalContribution > 0){
-      let contributionTitle = this.state.contributionTitle;
-      let contributionUrl = this.state.contributionUrl;
-        contributions = contributionTitle.slice(0, 5).map((i, j) => {
-          return <div className="item">
-                      <h4 key={j}>{i}</h4>
-                      <h5 key={j+10}><a href={contributionUrl[j]}>{contributionUrl[j]}</a></h5>
-                </div>;
-        });
+        contributions = <Contribution
+                                contributionTitles={this.state.contributionTitle}
+                                contributionUrls={this.state.contributionUrl}
+                        />
       }
 
     return (
       <div>
         <Searchbar searchProfile={this.getProfile.bind(this)}/>
-
         {header}
         <div className="container">
             {git_profile}
-            <h2>Languages</h2>
-            <div className="rule"></div>
             {skills}
-            <h2>Recent Contributions</h2>
-            <div className="rule"></div>
             {contributions}
         </div>
 
