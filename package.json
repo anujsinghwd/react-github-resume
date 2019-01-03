@@ -5,11 +5,9 @@
   "dependencies": {
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
-    "react-loader-spinner": "^2.3.0",
+    "react-progress-2": "^4.4.3",
     "react-scripts": "2.1.1",
-    "react-spinners": "^0.4.8",
-    "serve": "^10.1.1",
-    "superagent": "^4.1.0"
+    "serve": "^10.1.1"
   },
   "scripts": {
     "start": "react-scripts start",

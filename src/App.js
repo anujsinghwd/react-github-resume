@@ -2,25 +2,28 @@ import React, { Component } from 'react';
 import Searchbar from './components/Searchbar';
 import Profile from './components/Profile';
 import Header from './components/Header';
+import Footer from './components/Footer';
 import Language from './components/Language';
 import Contribution from './components/Contribution';
+import Progress from "react-progress-2";
 const API = `https://api.github.com/users`;
 const apiToken = `${process.env.REACT_APP_GITHUB_ACCESS_TOKEN}`;
 
 class App extends Component {
 
-  constructor(props){
-    super(props);
-    this.state = {
-      user: [],
-      language: [],
-      totalContribution: 0,
-      contributionTitle: [],
-      contributionUrl: []
+    constructor(props){
+      super(props);
+      this.state = {
+        user: [],
+        language: [],
+        totalContribution: 0,
+        contributionTitle: [],
+        contributionUrl: []
+      }
     }
-  }
 
     getProfile(username) {
+        Progress.show();
         let finalURL = `${API}/${username}`;
         fetch(finalURL,{
            headers: new Headers({
@@ -40,7 +43,7 @@ class App extends Component {
     getContributions(username){
       let contributionTitle = [];
       let contributionUrl = [];
-      let finalURL = `https://api.github.com/search/issues?q=type:pr+is:merged+author:${username}&per_page=100`;
+      let finalURL = `https://api.github.com/search/issues?q=type:pr+is:merged+author:${username}&per_page=20`;
       fetch(finalURL,{
          headers: new Headers({
            'Authorization': `token ${apiToken}`,
@@ -59,6 +62,7 @@ class App extends Component {
                 contributionTitle,
                 contributionUrl
             });
+            Progress.hide();
         })
        .catch((error) => console.log('There was a problem in fetching data'));
     }
@@ -79,7 +83,7 @@ class App extends Component {
                     languages.push(element['language']);
                 }
             })
-            var uniq = [ ...new Set(languages) ];
+            var uniq = [...new Set(languages)];
             this.setState({language: uniq});
         })
        .catch((error) => console.log('There was a problem in fetching data'));
@@ -112,20 +116,17 @@ class App extends Component {
 
     return (
       <div>
-        <Searchbar searchProfile={this.getProfile.bind(this)}/>
-        {header}
-        <div className="container">
-            {git_profile}
-            {skills}
-            {contributions}
+        <div className="layout">
+            <Progress.Component/>
+            <Searchbar searchProfile={this.getProfile.bind(this)}/>
+              { header }
+            <div className="container">
+                { git_profile }
+                { skills }
+                { contributions }
+            </div>
+            <Footer />
         </div>
-
-        <footer>
-        <div className="container">
-          <h3>Get in touch?&nbsp;&nbsp;</h3>
-          <h4>anuj_singh@outlook.in</h4>
-        </div>
-        </footer>
       </div>
     );
   }
