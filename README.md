@@ -2,6 +2,17 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+
+## To see how it's work
+
+- Fork and star this repo**
+- Clone this repo**
+- git clone https://github.com/anujsinghwd/react-github-resume
+- Run `npm install`
+- Create a file `.env.development.local` and put your `github` Access Token in `REACT_APP_GITHUB_ACCESS_TOKEN` var
+- Run `npm start`
+
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -31,3 +42,10 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+
+## Credits
+
+[ReactJS](https://github.com/facebook/react)
+
+[Create React App](https://github.com/facebook/create-react-app).
