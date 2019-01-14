@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 
 
-class AboutNew extends Component {
-  //const = [{'PHP':'<i class="fab fa-php"></i>'}];
+class Organization extends Component {
 
   render() {
-    const skillss = this.props.Languages;
-    const skills = skillss.map((skill, index) => (
+    const orgs = this.props.Orgs;
+    console.log(orgs);
+    const Orgss = orgs.map((comp, index) => (
       <div key={index} className="p-3">
-          <i className="fas fa-dot-circle"></i> {skill}
+          <span><img src={comp.avatar_url} class="img-rounded" width="40" height="40" /> {comp.login}</span>
       </div>
     ));
 
@@ -16,13 +16,13 @@ class AboutNew extends Component {
       <div ref="myRef">
           <section>
             <div className="container">
-              <h3 className="mb-1 text-info">Skills</h3>
+              <h3 className="mb-1 text-info">Organizations</h3>
                   <div className="row">
                     <div className="col-md-12">
                       <div className="card card-body bg-light mb-3">
                         <div className="row">
                           <div className="d-flex flex-wrap justify-content-center align-items-center">
-                            {skills}
+                            {Orgss}
                           </div>
                         </div>
                       </div>
@@ -35,4 +35,4 @@ class AboutNew extends Component {
   }
 }
 
-export default AboutNew;
+export default Organization;
