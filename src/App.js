@@ -6,6 +6,10 @@ import Footer from './components/Footer';
 import Language from './components/Language';
 import Contribution from './components/Contribution';
 import Progress from "react-progress-2";
+import Test from './components/Test';
+import HeaderNew from './components/HeaderNew';
+import SkillsNew from './components/SkillsNew';
+
 const API = `https://api.github.com/users`;
 const apiToken = `${process.env.REACT_APP_GITHUB_ACCESS_TOKEN}`;
 
@@ -18,12 +22,17 @@ class App extends Component {
         language: [],
         totalContribution: 0,
         contributionTitle: [],
-        contributionUrl: []
+        contributionUrl: [],
+        repos: []
       }
     }
 
+    componentDidMount(){
+      this.getProfile('anujsinghwd');
+    }
+
     getProfile(username) {
-        Progress.show();
+        //Progress.show();
         let finalURL = `${API}/${username}`;
         fetch(finalURL,{
            headers: new Headers({
@@ -41,31 +50,24 @@ class App extends Component {
     }
 
     getContributions(username){
-      let contributionTitle = [];
-      let contributionUrl = [];
-      let finalURL = `https://api.github.com/search/issues?q=type:pr+is:merged+author:${username}&per_page=20`;
-      fetch(finalURL,{
-         headers: new Headers({
-           'Authorization': `token ${apiToken}`,
-           'Content-Type': 'application/x-www-form-urlencoded'
-         })
-       })
-      .then((res) => res.json())
-      .then((data) => {
-          const totalContribution = data['total_count'];
-            data['items'].forEach(function(element){
-                contributionTitle.push(element['title']);
-                contributionUrl.push(element['repository_url']);
-            })
-            this.setState({
-                totalContribution,
-                contributionTitle,
-                contributionUrl
-            });
-            Progress.hide();
-        })
-       .catch((error) => console.log('There was a problem in fetching data'));
+          fetch(
+            `https://api.github.com/users/${username}/repos?per_page=5&sort=created: asc`,
+            {
+             headers: new Headers({
+               'Authorization': `token ${apiToken}`,
+               'Content-Type': 'application/x-www-form-urlencoded'
+             })
+           }
+         )
+          .then(res => res.json())
+          .then(data => {
+
+              this.setState({ repos: data });
+
+          })
+          .catch(err => console.log(err));
     }
+
 
     getLanguages(username){
       let languages = [];
@@ -92,8 +94,9 @@ class App extends Component {
   render() {
     var git_profile;
     var header;
-    var skills;
+    var about_new;
     var contributions;
+    var header_new;
     if(this.state.user.login)
     {
         let userData = this.state.user;
@@ -101,32 +104,20 @@ class App extends Component {
         let name = (userData.name)  ? userData.name : userData.login;
         git_profile = <Profile login={userData.login} name={name}  Website={userData.blog} location={userData.location} joined={join[0]} followers={userData.followers} public_repo={userData.public_repos}/>
         header = <Header name={name}/>
-    }
+        header_new = <HeaderNew name={name}/>;
+        about_new = <SkillsNew Languages={this.state.language}/>;
+        contributions = <Contribution Repos={this.state.repos} />
 
-    if(this.state.language.length > 0){
-        skills = <Language languages={this.state.language} />
     }
-
-    if(this.state.totalContribution > 0){
-        contributions = <Contribution
-                                contributionTitles={this.state.contributionTitle}
-                                contributionUrls={this.state.contributionUrl}
-                        />
-      }
 
     return (
       <div>
-        <div className="layout">
-            <Progress.Component/>
-            <Searchbar searchProfile={this.getProfile.bind(this)}/>
-              { header }
-            <div className="container">
-                { git_profile }
-                { skills }
-                { contributions }
-            </div>
-            <Footer />
-        </div>
+          { header_new }
+          <div id="main">
+              {git_profile}
+              {about_new}
+              {contributions}
+          </div>
       </div>
     );
   }

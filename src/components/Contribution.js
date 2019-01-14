@@ -1,24 +1,41 @@
 import React, { Component } from 'react';
 
 class Contribution extends Component {
-  render() {
-    var repo_contributions;
-    let contributionTitles = this.props.contributionTitles;
-    let contributionUrls = this.props.contributionUrls;
-      repo_contributions = contributionTitles.slice(0, 5).map((i, j) => {
-        return <div className="item">
-                    <h4 key={j}>{i}</h4>
-                    <h5 key={j+10}><a href={contributionUrls[j]}>{contributionUrls[j]}</a></h5>
-              </div>;
-    });
+  render(){
+    const repoItems = this.props.Repos.map(repo => (
+      <div key={repo.id} className="card card-body mb-0">
+        <div className="row">
+          <div className="col-md-6">
+            <h4>
+                {repo.name}
+            </h4>
+            <p>{repo.description}</p>
+          </div>
+          <div className="col-md-6">
+            <span className="badge badge-info mr-1">
+              <i className="fas fa-star"></i> Stars: {repo.stargazers_count}
+            </span>
+            <span className="badge badge-secondary mr-1">
+              <i className="far fa-eye"></i> Watchers: {repo.watchers_count}
+            </span>
+            <span className="badge badge-success">
+             <i className="fas fa-code-branch"></i>  Forks: {repo.forks_count}
+            </span>
+          </div>
+        </div>
+      </div>
+    ));
 
     return (
-      <div>
-          <h2>Recent Contributions</h2>
-          <div className="rule"></div>
-          {repo_contributions}
-      </div>
-    );
+      <div ref="myRef">
+        <section>
+            <div className="container">
+            <h3 className="mb-1 text-info">Latest Github Repos</h3>
+            {repoItems}
+          </div>
+        </section>
+    </div>
+    )
   }
 }
 
