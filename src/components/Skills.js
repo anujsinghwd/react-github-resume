@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 
-class AboutNew extends Component {
+class Skills extends Component {
   //const = [{'PHP':'<i class="fab fa-php"></i>'}];
 
   render() {
@@ -35,4 +35,4 @@ class AboutNew extends Component {
   }
 }
 
-export default AboutNew;
+export default Skills;

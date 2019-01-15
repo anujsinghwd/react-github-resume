@@ -3,15 +3,12 @@ import Searchbar from './components/Searchbar';
 import Profile from './components/Profile';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Language from './components/Language';
-import Contribution from './components/Contribution';
+import LatestRepo from './components/LatestRepo';
 import Progress from "react-progress-2";
-import Test from './components/Test';
-import HeaderNew from './components/HeaderNew';
-import SkillsNew from './components/SkillsNew';
+import Skills from './components/Skills';
 import PopularRepos from './components/PopularRepos';
 import Organization from './components/Organization';
-
+import Issues from './components/Issues';
 const API = `https://api.github.com/users`;
 const apiToken = `${process.env.REACT_APP_GITHUB_ACCESS_TOKEN}`;
 
@@ -27,13 +24,13 @@ class App extends Component {
         contributionUrl: [],
         repos: [],
         popular_repos: [],
-        orgs: []
+        orgs: [],
+        issues: []
       }
     }
 
     componentDidMount(){
       this.getProfile('anujsinghwd');
-      console.log('ComponentDidMount Works');
     }
 
     getProfile(username) {
@@ -85,6 +82,7 @@ class App extends Component {
       .then(res => res.json())
       .then(data => {
           this.setState({orgs: data});
+          this.getIssues(username);
       })
       .catch(err => console.log(err));
     }
@@ -119,6 +117,28 @@ class App extends Component {
         }
     }
 
+    getIssues(username){
+      let issue = [];
+      fetch(
+        `https://api.github.com/search/issues?q=type:pr+is:merged+author:${username}&per_page=10&page=1`,
+        {
+        headers: new Headers({
+          'Authorization': `token ${apiToken}`,
+          'Content-Type': 'application/x-www-form-urlencoded'
+        })
+      }
+    )
+      .then(res => res.json())
+      .then(data => {
+          console.log(data);
+          data['items'].forEach(function (e) {
+              issue.push({id: e['id'], title: e['title'], body: e['body'], url: e['html_url'], state: e['state']});
+          })
+          this.setState({issues: issue});
+      })
+      .catch(err => console.log(err));
+    }
+
 
     getLanguages(username){
       let languages = [];
@@ -146,34 +166,38 @@ class App extends Component {
     var git_profile;
     var header;
     var about_new;
-    var contributions;
+    var latestrepos;
     var header_new;
     var popular_repo;
     var organization;
-    if(this.state.repos.length > 0 && this.state.language.length > 0 && this.state.user.name && this.state.popular_repos.length > 0 && this.state.orgs.length > 0)
+    var issues;
+    var skills;
+    if(this.state.repos.length > 0 && this.state.language.length > 0 && this.state.user.name && this.state.popular_repos.length > 0 && this.state.orgs.length > 0 && this.state.issues.length > 0)
     {
         let userData = this.state.user;
         let join = userData.created_at.split('-');
         let name = (userData.name)  ? userData.name : userData.login;
         git_profile = <Profile login={userData.login} name={name}  Website={userData.blog} location={userData.location} joined={join[0]} followers={userData.followers} public_repo={userData.public_repos}/>
-        header = <Header name={name}/>
-        header_new = <HeaderNew name={name}/>
-        about_new = <SkillsNew Languages={this.state.language}/>
-        contributions = <Contribution Repos={this.state.repos} />
+        header = <Header name={name} profileGet={this.getProfile.bind(this)} />
+        skills = <Skills Languages={this.state.language}/>
+        latestrepos = <LatestRepo Repos={this.state.repos} />
         popular_repo = <PopularRepos popularRepos={this.state.popular_repos}/>
         organization = <Organization Orgs = {this.state.orgs} />
+        issues = <Issues Issues={this.state.issues}/>
     }
 
     return (
       <div>
-          { header_new }
+          { header }
           <div id="main">
               {git_profile}
               {organization}
-              {about_new}
+              {skills}
               {popular_repo}
-              {contributions}
+              {latestrepos}
+              {issues}
           </div>
+          <Footer />
       </div>
     );
   }

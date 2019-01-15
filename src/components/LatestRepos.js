@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 const apiToken = `${process.env.REACT_APP_GITHUB_ACCESS_TOKEN}`;
 
-class Test extends Component {
+class LatestRepos extends Component {
 
   constructor(props) {
     super(props);
@@ -71,4 +71,4 @@ class Test extends Component {
   }
 }
 
-export default Test;
+export default LatestRepos;

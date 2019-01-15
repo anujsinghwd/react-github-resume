@@ -3,14 +3,14 @@ import React, { Component } from 'react';
 class Footer extends Component {
   render() {
     return (
-      <div>
-        <footer>
-          <div className="container">
-            <h3>Get in touch?&nbsp;&nbsp;</h3>
-            <h4>anuj_singh@outlook.in</h4>
-          </div>
-        </footer>
-      </div>
+      <footer>
+        <div id="info-bar">
+            <div className="container clearfix">
+                <span className="all-tutorials"><a href="https://github.com/anujsinghwd">← GetInTouch</a></span>
+                <span className="back-to-tutorial"><a href="https://www.facebook.com/anujsinghwd">Anuj Singh</a></span>
+            </div>
+        </div>
+      </footer>
     );
   }
 }

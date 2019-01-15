@@ -1,15 +1,24 @@
 import React, { Component } from 'react';
+import Searchbar from './Searchbar';
 
-class Header extends Component {
-  render() {
-    return (
-      <div>
+class HeaderNew extends Component {
+
+  getProfiles(username){
+    this.props.profileGet(username);
+  }
+
+  render(){
+    return(
       <header>
-        <div className="container">{this.props.name}</div>
+          <div className="container clearfix">
+              <h1 id="logo">
+                  {this.props.name}
+              </h1>
+              <Searchbar getProfile={this.getProfiles.bind(this)}/>
+          </div>
       </header>
-      </div>
-    );
+    )
   }
 }
 
-export default Header;
+export default HeaderNew;

@@ -14,14 +14,6 @@ class Profile extends Component {
             </h4>
           </div>
         </div>
-
-        {/*
-          <h2>Website</h2>
-          <div className="rule"></div>
-            <div className="item">
-            <h4><a href={this.props.Website}>{this.props.Website}</a></h4>
-          </div>
-        */}
       </div>
       </section>
     );

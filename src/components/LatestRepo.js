@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Contribution extends Component {
+class LatestRepo extends Component {
   render(){
     const repoItems = this.props.Repos.map(repo => (
       <div key={repo.id} className="card card-body mb-0">
@@ -39,4 +39,4 @@ class Contribution extends Component {
   }
 }
 
-export default Contribution;
+export default LatestRepo;
