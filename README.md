@@ -1,6 +1,8 @@
-## Build Resume Using Github Profile
+## React-Github-Resume Builder
+  Build Resume Using Github Profile
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Preview
+  ![Preview](resume-app.gif)
 
 
 ## To see how it's work
