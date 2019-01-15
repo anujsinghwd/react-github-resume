@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700,700i');
+
+body, h1, h2, h3, h4 {
+  margin: 0;
+  padding: 0;
+  font-family: 'Merriweather';
+  font-size: 16px;
+  font-weight: 300;
+  color: black;
+  line-height: 50px;
+}
+
+header {
+  color: #FFF;
+  background: cadetblue;
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.container {
+  padding: 20px;
+}
+
+.item {
+  margin: 0px 0;
+}
+
+h2 {
+  color: cadetblue;
+  font-weight: 700;
+  border-bottom: 5px solid cadetblue;
+  display: inline-block;
+  line-height: 40px;
+  margin-top: 28px;
+}
+
+.rule {
+  box-sizing: border-box;
+  height: 1px;
+  background: #7596B8;
+}
+
+h3 {
+  color: #979797;
+  font-weight: 700;
+  margin-top: 20px;
+}
+
+.of {
+  font-weight: 300;
+  font-style: italic;
+}
+
+h4 {
+
+}
+
+h4 ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+h3, h4 {
+  line-height: 28px;
+}
+
+h5 {
+  font-size: 10px;
+  color: #7596B8;
+  margin-top: 0;
+  line-height: 32px;
+  letter-spacing: 0.5px;
+}
+
+footer {
+  background: #7596B8;
+  color: #FFF;
+  margin-top: 60px;
+}
+
+footer h3 {
+  color: #FFF;
+}
+
+footer h4 {
+  color: #EEE;
+}
+
+@media (min-width: 645px) {
+
+  body, h1, h2, h3, h4 {
+    font-size: 24px;
+  }
+
+  header {
+    padding: 30px 0;
+    margin-bottom: 16px;
+    font-size: 32px;
+  }
+
+  .container {
+    width: 85%;
+    margin: 0 auto;
+  }
+
+  h5 {
+    font-size: 12px;
+  }
+
+  h3, h4 {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 20px;
+  }
+
+  h4 ul {
+    margin-right: 48px;
+  }
+
+  h4 li {
+    padding: 0 0 12px 0;
+  }
+
+  footer {
+    padding: 30px 0 40px;
+  }
+
+}
+
+@media (min-width: 820px) {
+
+  .container {
+    width: 820px;
+    margin: 0 auto;
+  }
+
+}
