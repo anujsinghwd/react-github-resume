@@ -32,7 +32,7 @@ class App extends Component {
     }
 
     componentDidMount(){
-      this.getProfile('deshraj');
+      this.getProfile('anujsinghwd');
       console.log('ComponentDidMount Works');
     }
 

@@ -8,7 +8,7 @@ class Organization extends Component {
     console.log(orgs);
     const Orgss = orgs.map((comp, index) => (
       <div key={index} className="p-3">
-          <span><img src={comp.avatar_url} class="img-rounded" width="40" height="40" /> {comp.login}</span>
+          <span><img src={comp.avatar_url} className="img-rounded" width="40" height="40" /> {comp.login}</span>
       </div>
     ));
 
