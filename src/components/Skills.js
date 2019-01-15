@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 
 
 class Skills extends Component {
-  //const = [{'PHP':'<i class="fab fa-php"></i>'}];
-
   render() {
     const skillss = this.props.Languages;
     const skills = skillss.map((skill, index) => (

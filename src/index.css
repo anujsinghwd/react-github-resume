@@ -85,7 +85,7 @@ a:hover {
 
 #main {
   background-color: #fff;
-  padding-top: 150px; }
+  padding-top: 10px; }
 
 .container {
   width: 80%;
@@ -135,7 +135,6 @@ header {
   width: 100%;
   height: 150px;
   overflow: hidden;
-  position: fixed;
   top: 0;
   left: 0;
   z-index: 999;
