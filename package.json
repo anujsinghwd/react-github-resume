@@ -1,5 +1,5 @@
 {
-  "name": "react-resume",
+  "name": "react-github-resume",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
@@ -35,5 +35,13 @@
     "resume"
   ],
   "author": "anuj singh",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anujsinghwd/react-github-resume.git"
+  },
+  "bugs": {
+    "url": "https://github.com/anujsinghwd/react-github-resume/issues"
+  },
+  "homepage": "https://github.com/anujsinghwd/react-github-resume#readme"
 }

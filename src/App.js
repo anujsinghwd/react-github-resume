@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Searchbar from './components/Searchbar';
 import Profile from './components/Profile';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -34,7 +33,7 @@ class App extends Component {
     }
 
     getProfile(username) {
-        //Progress.show();
+        Progress.show();
         let finalURL = `${API}/${username}`;
         fetch(finalURL,{
            headers: new Headers({
@@ -130,13 +129,16 @@ class App extends Component {
     )
       .then(res => res.json())
       .then(data => {
-          console.log(data);
           data['items'].forEach(function (e) {
               issue.push({id: e['id'], title: e['title'], body: e['body'], url: e['html_url'], state: e['state']});
           })
           this.setState({issues: issue});
+          Progress.hide();
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+          console.log(err);
+          Progress.hide();
+      });
     }
 
 
@@ -165,29 +167,46 @@ class App extends Component {
   render() {
     var git_profile;
     var header;
-    var about_new;
     var latestrepos;
-    var header_new;
     var popular_repo;
     var organization;
     var issues;
     var skills;
-    if(this.state.repos.length > 0 && this.state.language.length > 0 && this.state.user.name && this.state.popular_repos.length > 0 && this.state.orgs.length > 0 && this.state.issues.length > 0)
+    if(this.state.repos.length > 0 && this.state.user.name)
     {
         let userData = this.state.user;
         let join = userData.created_at.split('-');
         let name = (userData.name)  ? userData.name : userData.login;
         git_profile = <Profile login={userData.login} name={name}  Website={userData.blog} location={userData.location} joined={join[0]} followers={userData.followers} public_repo={userData.public_repos}/>
         header = <Header name={name} profileGet={this.getProfile.bind(this)} />
+
+    }
+
+    if(this.state.language.length > 0){
         skills = <Skills Languages={this.state.language}/>
-        latestrepos = <LatestRepo Repos={this.state.repos} />
-        popular_repo = <PopularRepos popularRepos={this.state.popular_repos}/>
-        organization = <Organization Orgs = {this.state.orgs} />
-        issues = <Issues Issues={this.state.issues}/>
+    }
+
+    if(this.state.repos.length > 0){
+      latestrepos = <LatestRepo Repos={this.state.repos} />
+    }
+
+    if(this.state.popular_repos.length > 0){
+      popular_repo = <PopularRepos popularRepos={this.state.popular_repos}/>
+    }
+
+    if(this.state.orgs.length > 0){
+      organization = <Organization Orgs = {this.state.orgs} />
+    }
+
+    if(this.state.issues.length > 0){
+      issues = <Issues Issues={this.state.issues}/>
     }
 
     return (
-      <div>
+      <div className="layout">
+          <Progress.Component style={{background: 'orange'}}
+                              thumbStyle={{background: 'green'}}
+          />
           { header }
           <div id="main">
               {git_profile}

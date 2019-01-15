@@ -16,7 +16,6 @@ class Issues extends Component {
                   {issue.title}
               </h4>
               <p>{issue.body}</p>
-              <p><a herf={issue.url} onClick={this.openInNewTab}>Github</a></p>
           </div>
           <div className="col-md-2">
             <span className="badge badge-info mr-1">

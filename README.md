@@ -9,7 +9,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - Clone this repo**
 - git clone https://github.com/anujsinghwd/react-github-resume
 - Run `npm install`
-- Create a file `.env.development.local` and put your `github` Access Token in `REACT_APP_GITHUB_ACCESS_TOKEN` var
+- Create a file `.env.development.local` and put your `github` Access Token in `REACT_APP_GITHUB_ACCESS_TOKEN`
 - Run `npm start`
 
 
@@ -26,26 +26,24 @@ The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
 
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-
 ## Credits
+* [javascript](https://developer.mozilla.org/bm/docs/Web/JavaScript)
+* [ReactJS](https://github.com/facebook/react)
+* [Create React App](https://github.com/facebook/create-react-app).
+* [Github Apis](https://developer.github.com/v3/)
+* [Bootstrap v4](https://getbootstrap.com/)
 
-[ReactJS](https://github.com/facebook/react)
 
-[Create React App](https://github.com/facebook/create-react-app).
+## Built With
+* [javascript](https://developer.mozilla.org/bm/docs/Web/JavaScript)
+* [ReactJS](https://github.com/facebook/react)
+* [Create React App](https://github.com/facebook/create-react-app).
+* [Github Apis](https://developer.github.com/v3/)
+* [Bootstrap v4](https://getbootstrap.com/)
+
+## Authors
+* **Anuj Singh** - *Initial work* - [anujsinghwd](https://github.com/anujsinghwd)
+
+
+## Contribution
+Feel free to contribute
