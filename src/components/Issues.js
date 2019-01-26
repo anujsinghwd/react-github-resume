@@ -8,6 +8,8 @@ class Issues extends Component {
   }
 
   render() {
+    console.log(this.props.Issues);
+    
     const issueItems = this.props.Issues.map(issue => (
       <div key={issue.id} className="card card-body mb-0">
         <div className="row">
@@ -16,6 +18,7 @@ class Issues extends Component {
                   {issue.title}
               </h4>
               <p>{issue.body}</p>
+              <a href={issue.url} target="_blank">{issue.url}</a>
           </div>
           <div className="col-md-2">
             <span className="badge badge-info mr-1">

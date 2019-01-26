@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 class LatestRepo extends Component {
   render(){
+    console.log(this.props.Repos);
     const repoItems = this.props.Repos.map(repo => (
       <div key={repo.id} className="card card-body mb-0">
         <div className="row">
@@ -10,6 +11,7 @@ class LatestRepo extends Component {
                 {repo.name}
             </h4>
             <p>{repo.description}</p>
+            <a href={repo.html_url} target="_blank">{repo.html_url}</a>
           </div>
           <div className="col-md-6">
             <span className="badge badge-info mr-1">

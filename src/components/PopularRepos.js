@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 
 class PopularRepos extends Component {
   render(){
+    console.log(this.props.popularRepos);
     const repoItems = this.props.popularRepos.map(repo => (
       <div key={repo.id} className="card card-body mb-0">
         <div className="row">
           <div className="col-md-6">
-            <h4>
-                {repo.name}
-            </h4>
+          <h4>{repo.name}</h4>
             <p>{repo.description}</p>
+            <a href={repo.url} target="_blank">{repo.url}</a>
           </div>
           <div className="col-md-6">
             <span className="badge badge-info mr-1">
